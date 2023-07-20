@@ -22,11 +22,15 @@
 }
 
 .itemsDiv {
-    margin: 15px;
+    margin-top: 40px;
+    margin-left: 20px;
+    margin-bottom: 20px;
     width: 25%;
     border: 2px solid rgb(100, 99, 99);
     border-radius: 15px;
     padding: 10px;
+    box-shadow: 5px 5px #e4e2e2;
+    max-width: 350px;
 }
 
 .items {
@@ -37,4 +41,13 @@
 .titleDiv {
     margin-top: 5px;
     margin-left: 8px;
+}
+
+.search {
+    border-radius: 5px;
+    width: 65%;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+    margin-top: 7px;
 }

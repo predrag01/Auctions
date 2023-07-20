@@ -1,3 +1,5 @@
-import { drawItems } from "./view/itemListView";
+import { handleSerach } from "./logic/itemListLogic";
+import { drawItemList } from "./view/itemListView";
 
-drawItems();
+drawItemList();
+handleSerach();

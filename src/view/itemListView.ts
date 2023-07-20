@@ -2,7 +2,7 @@ import { Item } from "../models/Item";
 import { getItems } from "../controllers/Controller";
 import { drawDiv, drawLabel } from "../../pattern";
 
-function drawCard(parent: HTMLElement, item: Item){
+export function drawCard(parent: HTMLElement, item: Item){
     const div =drawDiv(parent, "item-div");
     const imgDiv=drawDiv(div, "imgDiv");
     const img=document.createElement("img");
@@ -16,12 +16,32 @@ function drawCard(parent: HTMLElement, item: Item){
     }
 }
 
-export function drawItems(){
-    const moviesDiv=drawDiv(document.body, "itemsDiv");
-    drawLabel(moviesDiv, "items", "Items");
+function drawItems(parent : HTMLElement){
     getItems().subscribe(items => {
         items.forEach(item => {
-            drawCard(moviesDiv, item);
+            drawCard(parent, item);
         })
     })
 };
+
+export function drawItemList() {
+    const itemsDiv=drawDiv(document.body, "itemsDiv");
+    const labDiv=drawDiv(itemsDiv, "labelDiv");
+    drawLabel(labDiv, "items", "Items");
+
+    const searchDiv=drawDiv(itemsDiv, "searchDiv");
+    const search=document.createElement("input");
+    search.className="search";
+    search.placeholder="Search";
+    searchDiv.appendChild(search);
+    drawItems(itemsDiv);
+}
+
+export function clearIteamList() {
+    const divs = document.querySelectorAll(".item-div");
+    if(divs.length===0){
+        return true;
+    }
+
+    divs.forEach(pair => pair.remove());
+}

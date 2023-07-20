@@ -2,8 +2,8 @@ import { Observable, from } from "rxjs";
 import { Item } from "../models/Item";
 import { URL } from "../Constants";
 
-export function getItem(title: string): Observable<Item>{
-    const ret = fetch(URL+"/"+ title).then(response => {
+export function getItemsByTitle(title: string): Observable<Item[]>{
+    const ret: Promise<Item[]> = fetch(URL+"?title="+ title).then(response => {
         if(!response.ok)
         {
             throw new Error ("Item not found")
@@ -16,7 +16,7 @@ export function getItem(title: string): Observable<Item>{
 
 
 export function getItems(): Observable<Item[]>{
-    const ret = fetch(URL).then(response => {
+    const ret: Promise<Item[]> = fetch(URL).then(response => {
         if(!response.ok)
         {
             throw new Error ("Items not found")
