@@ -1,0 +1,53 @@
+{
+    "Items": [
+        {
+            "id": "1",
+            "title": "Sat",
+            "description": "Odlicno ocuvan!",
+            "image": "sat.png",
+            "startPrice": "120"
+        },
+        {
+            "id": "2",
+            "title": "LapTop",
+            "description": "Kao nov, malo koriscen.",
+            "image": "laptop.png",
+            "startPrice": "450"
+        },
+        {
+            "id": "3",
+            "title": "TA pec",
+            "description": "Potpuna ispravna, sve radi, greje odlicno.",
+            "image": "TApec.png",
+            "startPrice": "85"
+        },
+        {
+            "id": "4",
+            "title": "Sony PlayStation 4",
+            "description": "Poptuno ispravan. Uz njega dolaze 2 kontrolera i 10 originalnih igrica.",
+            "image": "ps4.png",
+            "startPrice": "150"
+        },
+        {
+            "id": "5",
+            "title": "Hugo Boss parfem",
+            "description": "Original Hugo Boss parfem u pakovanju od 100ml.",
+            "image": "hugoParfem.png",
+            "startPrice": "55"
+        },
+        {
+            "id": "6",
+            "title": "Aparat za kafu Dolce Gusto",
+            "description": "Aparat za espreso kasfu, potpuno ispravan. Uz njega na poklon ide i kutija kafe.",
+            "image": "dolceGusto.png",
+            "startPrice": "30"
+        },
+        {
+            "id": "7",
+            "title": "Gejmerksa stolica",
+            "description": "Gejmerska stolica u dobrom stanju, malo koriscena.",
+            "image": "gejmerskaStolica.png",
+            "startPrice": "80"
+        }
+    ]
+}

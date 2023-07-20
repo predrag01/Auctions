@@ -1,14 +1,15 @@
 {
-  "name": "new-folder",
+  "name": "Auctions",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "watch": "webpack --watch"
+    "build": "webpack --config webpack.config.js",
+    "watch": "webpack --watch --config webpack.config.js",
+    "api": "json-server --watch db.json"
   },
-  "author": "",
+  "author": "Predrag Tosic",
   "license": "ISC",
   "devDependencies": {
     "rxjs": "^7.8.1",

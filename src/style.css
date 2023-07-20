@@ -1,0 +1,40 @@
+.img {
+    width: 100px;
+    height: 75px;
+    border-radius: 10px;
+  }
+
+.item-div {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    margin-top: 10px;
+    border: 1px solid black;
+    border-radius: 15px;
+    box-shadow: 5px 5px #e4e2e2;
+}
+
+.item-div:hover{
+    background-color: #f0efef;
+    margin-left: -5px;
+    margin-right: -5px;
+    margin-bottom: 10px;
+}
+
+.itemsDiv {
+    margin: 15px;
+    width: 25%;
+    border: 2px solid rgb(100, 99, 99);
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.items {
+    padding: 10px;
+    font-size: 25px;  
+}
+
+.titleDiv {
+    margin-top: 5px;
+    margin-left: 8px;
+}

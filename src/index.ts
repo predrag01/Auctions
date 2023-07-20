@@ -1,1 +1,3 @@
-document.write("Hello world");
+import { drawItems } from "./view/itemListView";
+
+drawItems();
