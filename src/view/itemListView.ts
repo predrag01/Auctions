@@ -40,7 +40,7 @@ export function drawItemList() {
 export function clearIteamList() {
     const divs = document.querySelectorAll(".item-div");
     if(divs.length===0){
-        return true;
+        return;
     }
 
     divs.forEach(pair => pair.remove());

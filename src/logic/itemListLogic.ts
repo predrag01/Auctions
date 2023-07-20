@@ -10,7 +10,7 @@ export function handleSerach() {
         debounceTime(500),
         map((event : InputEvent) => (<HTMLInputElement>event.target).value),
         filter((title : string) => {
-            if(title.length>=3){
+            if(title.length>=2){
                 return true
             }
 
@@ -18,16 +18,16 @@ export function handleSerach() {
             loadItems();
         }),
         switchMap(title =>  getItemsByTitle(title))
-    ).subscribe(items => handleSerachResult(items));
+    ).subscribe(items => handleSerachResults(items));
 }
 
 function loadItems() {
     getItems().subscribe((items) =>{
-        handleSerachResult(items);
+        handleSerachResults(items);
     })
 }
 
-function handleSerachResult(items : Item[]) {
+function handleSerachResults(items : Item[]) {
     clearIteamList();
 
     const itemsDiv: HTMLElement = document.querySelector(".itemsDiv");
