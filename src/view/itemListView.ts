@@ -1,6 +1,7 @@
 import { Item } from "../models/Item";
 import { getItems } from "../controllers/Controller";
 import { drawDiv, drawLabel } from "../pattern";
+import { clearDetails, drawDetails } from "./itemDetailView";
 
 export function drawCard(parent: HTMLElement, item: Item){
     const div =drawDiv(parent, "item-div");
@@ -13,6 +14,7 @@ export function drawCard(parent: HTMLElement, item: Item){
     drawLabel(titleDiv, "itemTitle", item.title);
     div.onclick = () => {
         console.log(item.title);
+        drawDetails(item);
     }
 }
 
