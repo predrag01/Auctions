@@ -1,6 +1,6 @@
 import { Item } from "../models/Item";
 import { getItems } from "../controllers/Controller";
-import { drawDiv, drawLabel } from "../../pattern";
+import { drawDiv, drawLabel } from "../pattern";
 
 export function drawCard(parent: HTMLElement, item: Item){
     const div =drawDiv(parent, "item-div");
@@ -25,7 +25,8 @@ function drawItems(parent : HTMLElement){
 };
 
 export function drawItemList() {
-    const itemsDiv=drawDiv(document.body, "itemsDiv");
+    const mainDiv=drawDiv(document.body, "mainDiv");
+    const itemsDiv=drawDiv(mainDiv, "itemsDiv");
     const labDiv=drawDiv(itemsDiv, "labelDiv");
     drawLabel(labDiv, "items", "Items");
 
