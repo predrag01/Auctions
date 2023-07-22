@@ -26,6 +26,7 @@
     margin-left: 20px;
     margin-bottom: 20px;
     width: 25%;
+    height: 100%;
     border: 2px solid rgb(100, 99, 99);
     border-radius: 15px;
     padding: 10px;
@@ -46,6 +47,7 @@
 .search {
     border-radius: 5px;
     width: 65%;
+    height: 20px;
     margin-left: 5px;
     margin-right: 5px;
     margin-bottom: 10px;
@@ -95,6 +97,8 @@
 }
 
 .watch1Div {
+    display: flex;
+    flex-direction: column;
     border: 2px solid rgb(100, 99, 99);
     box-shadow: 5px 5px #e4e2e2;
     width: 48%;
@@ -103,11 +107,23 @@
 }
 
 .watch2Div {
+    display: flex;
+    flex-direction: column;
     border: 2px solid rgb(100, 99, 99);
     box-shadow: 5px 5px #e4e2e2;
     width: 48%;
     height: 100%;
     border-radius: 15px;
+}
+
+.watchTitleDiv {
+    margin: 10px;
+}
+
+.watchTitle {
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
 }
 
 .singleItemDiv {
@@ -123,7 +139,7 @@
     justify-content: center; 
     width: 320px;
     height: 100%;
-    
+    border-radius: 15px;
 }
 
 .imgDetails {
@@ -202,3 +218,92 @@
 .watch:hover {
     background-color: #51149c;
   }
+
+.singleWatch1Div {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.singleWatch2Div {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.detailsWatch1 {
+    display: flex;
+    flex-direction: row;
+    height: 45%;
+    width: 90%;
+    margin-left: 10px;
+}
+
+.titleItemWatch1Div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    margin-right: 15px;
+}
+
+.titleItemWatch1Label {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.imgWatch1 {
+    height: 100%;
+    width: 160px;
+    object-fit: contain;
+}
+
+.additionalInfoDiv {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    margin-left: 10px;
+}
+
+.biddingDiv {
+    width: 90%;
+    display: flex;
+    justify-content: flex-end;
+    height: 100%;
+    align-items: end;
+    margin-bottom: 15px;
+}
+
+.inputBid {
+    height: 22px;
+    margin-right: 10px;
+}
+
+.btnBid {
+    font-size: 15px;
+    padding: 5px 15px;
+    background-color: #6f3dad;
+    color: #ffffff;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.btnBid:hover {
+    background-color: #51149c;
+}
+
+.inforamtionLab {
+    font-size: 18px;
+}
+
+.inforamtionLabValue {
+    font-size: 18px;
+    font-weight: bold;
+}

@@ -1,5 +1,5 @@
 import { Item } from "../models/Item";
-import { drawDiv, drawLabel } from "../pattern";
+import { drawDiv, drawImg, drawLabel } from "../pattern";
 
 export function drawCenter() {
     const mainDiv: HTMLElement =document.querySelector(".mainDiv");
@@ -7,10 +7,17 @@ export function drawCenter() {
 
     const mainTitleDiv= drawDiv(centerDiv, "mainTitleDiv");
     drawLabel(mainTitleDiv, "mainTitle", "Live Auctions");
+
     const detailsDiv=drawDiv(centerDiv, "detailsDiv");
-    const watcshDiv=drawDiv(centerDiv, "watchsDiv");
-    const watcs1Div=drawDiv(watcshDiv, "watch1Div");
-    const watcs2Div=drawDiv(watcshDiv, "watch2Div");
+    
+    const watchsDiv=drawDiv(centerDiv, "watchsDiv");
+    const watch1Div=drawDiv(watchsDiv, "watch1Div");
+    const watch1TitleDiv=drawDiv(watch1Div, "watchTitleDiv");
+    drawLabel(watch1TitleDiv, "watchTitle", "Watch 1");
+    
+    const watch2Div=drawDiv(watchsDiv, "watch2Div");
+    const watch2TitleDiv=drawDiv(watch2Div, "watchTitleDiv");
+    drawLabel(watch2TitleDiv, "watchTitle", "Watch 2");
 }
 
 export function drawDetails(item : Item) {
@@ -21,10 +28,7 @@ export function drawDetails(item : Item) {
     const singleItemDiv=drawDiv(detailsDiv, "singleItemDiv");
 
     const imgDiv=drawDiv(singleItemDiv, "imgDetailsDiv");
-    const img = document.createElement("img");
-    img.className="imgDetails"
-    img.src= "./images/"+item.image;
-    imgDiv.appendChild(img);
+    drawImg(imgDiv, item, "imgDetails");
 
     const descDiv = drawDiv(singleItemDiv, "descDiv");
 
@@ -51,12 +55,18 @@ export function drawDetails(item : Item) {
     const btnwatch1 = document.createElement("button");
     btnwatch1.className="watch";
     btnwatch1.innerHTML="Watch 1";
+    btnwatch1.onclick = () => {
+        drawWatch1(item);
+    };
     btnWatch1Div.appendChild(btnwatch1);
 
     const btnWatch2Div = drawDiv(bottonsDiv, "btnWatch2Div");
     const btnwatch2 = document.createElement("button");
     btnwatch2.className="watch";
     btnwatch2.innerHTML="Watch 2";
+    btnwatch2.onclick = () => {
+        drawWatch2(item);
+    };
     btnWatch2Div.appendChild(btnwatch2);
 }
 
@@ -68,3 +78,122 @@ export function clearDetails()
     }
 }
 
+function drawWatch1(item : Item) {
+    clearWatch1();
+
+    const watch1Div : HTMLElement = document.querySelector(".watch1Div");
+
+    const singleWatch1Div = drawDiv(watch1Div, "singleWatch1Div");
+
+    const titleItemWatch1Div = drawDiv(singleWatch1Div, "titleItemWatch1Div");
+    drawLabel(titleItemWatch1Div, "titleItemWatch1Label", item.title);
+    const btnX = document.createElement("button");
+    btnX.className="btnX";
+    btnX.innerHTML="X";
+    btnX.onclick = () => {
+        clearWatch1();
+    }
+    titleItemWatch1Div.appendChild(btnX);
+    
+    const detailsWatch1 = drawDiv(singleWatch1Div, "detailsWatch1");
+    const imgWatch1Div = drawDiv(detailsWatch1, "imgWatch1Div");
+    drawImg(imgWatch1Div, item, "imgWatch1");
+
+    const additionalInfoDiv = drawDiv(detailsWatch1, "additionalInfoDiv");
+    
+    const startingPriceDiv = drawDiv(additionalInfoDiv, "startingPriceDiv");
+    drawLabel(startingPriceDiv, "inforamtionLab", "Starting price: "+ item.startPrice);
+    drawLabel(startingPriceDiv, "inforamtionLab", "€");
+
+    const currentPriceDiv = drawDiv(additionalInfoDiv, "currentPriceDiv");
+    drawLabel(currentPriceDiv, "inforamtionLab", "Current price: ");
+    drawLabel(currentPriceDiv, "inforamtionLabValue", item.startPrice.toString());
+    drawLabel(currentPriceDiv, "inforamtionLabValue", "€");
+
+    const remainingTimeDiv = drawDiv(additionalInfoDiv, "remainingTimeDiv");
+    drawLabel(remainingTimeDiv, "inforamtionLab", "Remaining time: ");
+    drawLabel(remainingTimeDiv, "inforamtionLabValue", "20");
+    drawLabel(remainingTimeDiv, "inforamtionLabValue", "s");
+
+    const biddingDiv = drawDiv(singleWatch1Div, "biddingDiv");
+    const inputBid= document.createElement("input");
+    inputBid.className="inputBid";
+    inputBid.type="number";
+    inputBid.min="0";
+    inputBid.step="10";
+    inputBid.value=item.startPrice.toString();
+    biddingDiv.appendChild(inputBid);
+
+    const bidBtn =document.createElement("button");
+    bidBtn.className="btnBid";
+    bidBtn.innerHTML="Bid";
+    biddingDiv.appendChild(bidBtn);
+
+}
+
+function clearWatch1() {
+    const singleWatch1Div =document.querySelector(".singleWatch1Div");
+    if(singleWatch1Div){
+        singleWatch1Div.remove();
+    }
+}
+
+function drawWatch2(item : Item) {
+    clearWatch2();
+
+    const watch2Div : HTMLElement = document.querySelector(".watch2Div");
+
+    const singleWatch2Div = drawDiv(watch2Div, "singleWatch2Div");
+
+    const titleItemWatch1Div = drawDiv(singleWatch2Div, "titleItemWatch1Div");
+    drawLabel(titleItemWatch1Div, "titleItemWatch1Label", item.title);
+    const btnX = document.createElement("button");
+    btnX.className="btnX";
+    btnX.innerHTML="X";
+    btnX.onclick = () => {
+        clearWatch2();
+    }
+    titleItemWatch1Div.appendChild(btnX);
+    
+    const detailsWatch1 = drawDiv(singleWatch2Div, "detailsWatch1");
+    const imgWatch1Div = drawDiv(detailsWatch1, "imgWatch1Div");
+    drawImg(imgWatch1Div, item, "imgWatch1");
+
+    const additionalInfoDiv = drawDiv(detailsWatch1, "additionalInfoDiv");
+    
+    const startingPriceDiv = drawDiv(additionalInfoDiv, "startingPriceDiv");
+    drawLabel(startingPriceDiv, "inforamtionLab", "Starting price: "+ item.startPrice);
+    drawLabel(startingPriceDiv, "inforamtionLab", "€");
+
+    const currentPriceDiv = drawDiv(additionalInfoDiv, "currentPriceDiv");
+    drawLabel(currentPriceDiv, "inforamtionLab", "Current price: ");
+    drawLabel(currentPriceDiv, "inforamtionLabValue", item.startPrice.toString());
+    drawLabel(currentPriceDiv, "inforamtionLabValue", "€");
+
+    const remainingTimeDiv = drawDiv(additionalInfoDiv, "remainingTimeDiv");
+    drawLabel(remainingTimeDiv, "inforamtionLab", "Remaining time: ");
+    drawLabel(remainingTimeDiv, "inforamtionLabValue", "20");
+    drawLabel(remainingTimeDiv, "inforamtionLabValue", "s");
+
+    const biddingDiv = drawDiv(singleWatch2Div, "biddingDiv");
+    const inputBid= document.createElement("input");
+    inputBid.className="inputBid";
+    inputBid.type="number";
+    inputBid.min="0";
+    inputBid.step="10";
+    inputBid.value=item.startPrice.toString();
+    biddingDiv.appendChild(inputBid);
+
+    const bidBtn =document.createElement("button");
+    bidBtn.className="btnBid";
+    bidBtn.innerHTML="Bid";
+    biddingDiv.appendChild(bidBtn);
+
+}
+
+function clearWatch2() {
+    const singleWatch2Div =document.querySelector(".singleWatch2Div");
+    if(singleWatch2Div){
+        singleWatch2Div.remove();
+    }
+}
