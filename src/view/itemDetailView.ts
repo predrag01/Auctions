@@ -1,3 +1,4 @@
+import { simulateAuction } from "../logic/auctionLogic";
 import { Item } from "../models/Item";
 import { drawDiv, drawImg, drawLabel } from "../pattern";
 
@@ -57,6 +58,11 @@ export function drawDetails(item : Item) {
     btnwatch1.innerHTML="Watch 1";
     btnwatch1.onclick = () => {
         drawWatch1(item);
+        const secondsLabel : HTMLElement =document.querySelector(".secondsWatch1");
+        const currentPriceWatch1 : HTMLElement =document.querySelector(".currentPriceWatch1");
+        const watch1Div : HTMLElement =document.querySelector(".watch1Div");
+        const inputBid1 : HTMLElement =document.querySelector(".inputBid1");
+        simulateAuction(item, secondsLabel, currentPriceWatch1, watch1Div, inputBid1);
     };
     btnWatch1Div.appendChild(btnwatch1);
 
@@ -107,26 +113,33 @@ function drawWatch1(item : Item) {
 
     const currentPriceDiv = drawDiv(additionalInfoDiv, "currentPriceDiv");
     drawLabel(currentPriceDiv, "inforamtionLab", "Current price: ");
-    drawLabel(currentPriceDiv, "inforamtionLabValue", item.startPrice.toString());
+    drawLabel(currentPriceDiv, "currentPriceWatch1", item.startPrice.toString());
     drawLabel(currentPriceDiv, "inforamtionLabValue", "€");
 
     const remainingTimeDiv = drawDiv(additionalInfoDiv, "remainingTimeDiv");
     drawLabel(remainingTimeDiv, "inforamtionLab", "Remaining time: ");
-    drawLabel(remainingTimeDiv, "inforamtionLabValue", "20");
+    drawLabel(remainingTimeDiv, "secondsWatch1", "");
     drawLabel(remainingTimeDiv, "inforamtionLabValue", "s");
 
     const biddingDiv = drawDiv(singleWatch1Div, "biddingDiv");
-    const inputBid= document.createElement("input");
-    inputBid.className="inputBid";
-    inputBid.type="number";
-    inputBid.min="0";
-    inputBid.step="10";
-    inputBid.value=item.startPrice.toString();
-    biddingDiv.appendChild(inputBid);
+    const inputBid1= document.createElement("input");
+    inputBid1.className="inputBid1";
+    inputBid1.type="number";
+    inputBid1.min="0";
+    inputBid1.step="10";
+    inputBid1.value=item.startPrice.toString();
+    biddingDiv.appendChild(inputBid1);
 
     const bidBtn =document.createElement("button");
-    bidBtn.className="btnBid";
+    bidBtn.className="btnBidWatch1";
     bidBtn.innerHTML="Bid";
+    bidBtn.disabled=true;
+    bidBtn.onclick = () => {
+        console.log("Bit");
+        const currentPriceWatch1 : HTMLElement =document.querySelector(".currentPriceWatch1");
+        currentPriceWatch1.textContent=inputBid1.value;
+        bidBtn.disabled=true;
+    };
     biddingDiv.appendChild(bidBtn);
 
 }
@@ -172,7 +185,7 @@ function drawWatch2(item : Item) {
 
     const remainingTimeDiv = drawDiv(additionalInfoDiv, "remainingTimeDiv");
     drawLabel(remainingTimeDiv, "inforamtionLab", "Remaining time: ");
-    drawLabel(remainingTimeDiv, "inforamtionLabValue", "20");
+    drawLabel(remainingTimeDiv, "secondsWatch1", "20");
     drawLabel(remainingTimeDiv, "inforamtionLabValue", "s");
 
     const biddingDiv = drawDiv(singleWatch2Div, "biddingDiv");
@@ -188,7 +201,6 @@ function drawWatch2(item : Item) {
     bidBtn.className="btnBid";
     bidBtn.innerHTML="Bid";
     biddingDiv.appendChild(bidBtn);
-
 }
 
 function clearWatch2() {
@@ -196,4 +208,8 @@ function clearWatch2() {
     if(singleWatch2Div){
         singleWatch2Div.remove();
     }
+}
+
+export function updateRemainingSeconds(seconds : number, secondsLabel: HTMLElement) {
+    secondsLabel.innerHTML=seconds.toString();
 }

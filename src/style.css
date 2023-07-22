@@ -32,6 +32,7 @@
     padding: 10px;
     box-shadow: 5px 5px #e4e2e2;
     max-width: 350px;
+    min-height: 800px;
 }
 
 .items {
@@ -280,12 +281,12 @@
     margin-bottom: 15px;
 }
 
-.inputBid {
+.inputBid1 {
     height: 22px;
     margin-right: 10px;
 }
 
-.btnBid {
+.btnBidWatch1 {
     font-size: 15px;
     padding: 5px 15px;
     background-color: #6f3dad;
@@ -303,7 +304,7 @@
     font-size: 18px;
 }
 
-.inforamtionLabValue {
+.inforamtionLabValue, .secondsWatch1, .currentPriceWatch1 {
     font-size: 18px;
     font-weight: bold;
 }
