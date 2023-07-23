@@ -6,7 +6,7 @@
             "description": "Odlicno ocuvan!",
             "image": "sat.png",
             "startPrice": "120",
-            "livePrice": "120"
+            "buyer": ""
         },
         {
             "id": "2",
@@ -14,7 +14,7 @@
             "description": "Kao nov, malo koriscen.",
             "image": "laptop.png",
             "startPrice": "450",
-            "livePrice": "450"
+            "buyer": ""
         },
         {
             "id": "3",
@@ -22,7 +22,7 @@
             "description": "Potpuna ispravna, sve radi, greje odlicno.",
             "image": "TApec.png",
             "startPrice": "85",
-            "livePrice": "85"
+            "buyer": ""
         },
         {
             "id": "4",
@@ -30,7 +30,7 @@
             "description": "Poptuno ispravan. Uz njega dolaze 2 kontrolera i 10 originalnih igrica.",
             "image": "ps4.png",
             "startPrice": "150",
-            "livePrice": "150"
+            "buyer": ""
         },
         {
             "id": "5",
@@ -38,7 +38,7 @@
             "description": "Original Hugo Boss parfem u pakovanju od 100ml.",
             "image": "hugoParfem.png",
             "startPrice": "55",
-            "livePrice": "55"
+            "buyer": ""
         },
         {
             "id": "6",
@@ -46,7 +46,7 @@
             "description": "Aparat za espreso kasfu, potpuno ispravan. Uz njega na poklon ide i kutija kafe.",
             "image": "dolceGusto.png",
             "startPrice": "30",
-            "livePrice": "30"
+            "buyer": ""
         },
         {
             "id": "7",
@@ -54,7 +54,7 @@
             "description": "Gejmerska stolica u dobrom stanju, malo koriscena.",
             "image": "gejmerskaStolica.png",
             "startPrice": "80",
-            "livePrice": "80"
+            "buyer": ""
         }
     ]
 }

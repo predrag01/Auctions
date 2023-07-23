@@ -281,12 +281,12 @@
     margin-bottom: 15px;
 }
 
-.inputBid1 {
+.inputBid1, .inputBid2 {
     height: 22px;
     margin-right: 10px;
 }
 
-.btnBidWatch1 {
+.btnBidWatch1, .btnBidWatch2 {
     font-size: 15px;
     padding: 5px 15px;
     background-color: #6f3dad;
@@ -304,7 +304,7 @@
     font-size: 18px;
 }
 
-.inforamtionLabValue, .secondsWatch1, .currentPriceWatch1 {
+.inforamtionLabValue, .secondsWatch1, .secondsWatch2, .currentPriceWatch1, .currentPriceWatch2 {
     font-size: 18px;
     font-weight: bold;
 }

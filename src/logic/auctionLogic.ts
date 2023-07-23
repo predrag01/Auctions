@@ -1,8 +1,19 @@
-import { Subscription, filter, fromEvent, interval, map, take } from "rxjs";
+import { Observable, Subscription, filter, finalize, forkJoin, fromEvent, interval, map, take } from "rxjs";
 import { Item } from "../models/Item";
 import { updateRemainingSeconds } from "../view/itemDetailView";
+import Swal from "sweetalert2";
 
-export function simulateAuction(item : Item, secondsLabel: HTMLElement, currentPriceWatch1: HTMLElement, watch1Div: HTMLElement, inputBid1: HTMLElement){
+const observableItems: Observable<number>[] = [];
+const itemsAuction : Item[] = [];
+
+export function addItem (item: Item) {
+    itemsAuction.push(item);
+}
+
+export function simulateAuction(item : Item, secondsLabel: HTMLElement,
+     currentPriceWatch1: HTMLElement, watch1Div: HTMLElement,
+      inputBid1: HTMLElement, button : HTMLButtonElement){
+
     const auctoinLenght: number = getAuctoinLenght();
 
     let botBiddingminutes : number [] = getBiddingMinutes(auctoinLenght);
@@ -13,44 +24,34 @@ export function simulateAuction(item : Item, secondsLabel: HTMLElement, currentP
 
             const offerBid : number = parseInt(offer);
             let price : number = parseInt(currentPriceWatch1.textContent!);
-
-            const btnBidWatch1 : HTMLElement =document.querySelector(".btnBidWatch1");
         
             if(offerBid >= price) {
-                btnBidWatch1.setAttribute("disabled", "false");
                 return true;
             } else{
-                btnBidWatch1.setAttribute("disabled", "true");
+                button.disabled=true;
                 return false;
             }
         })
     ).subscribe((userOffer : string) => {
-        const btnBidWatch1 : HTMLElement =document.querySelector(".btnBidWatch1");
-        btnBidWatch1.setAttribute("disabled", "false");
-        console.log(userOffer);
-
-        const currentPriceWatch1 : HTMLElement =document.querySelector(".currentPriceWatch1");
-        currentPriceWatch1.textContent=userOffer;
+        button.disabled=false;
     });
 
-    interval(1000).pipe(
+    const simulation =interval(1000).pipe(
         map(x => auctoinLenght-x),
         take(auctoinLenght),
-    ).subscribe((seocnds : number) => {
+        finalize(() => { endAuction(item, button, bidOffer, watch1Div);})
+    );
+
+    observableItems.push(simulation);
+
+    simulation.subscribe((seocnds : number) => {
         updateRemainingSeconds(seocnds, secondsLabel);
         
         if(seocnds === botBiddingminutes[0]) {
-            botBidding(currentPriceWatch1, watch1Div);
+            botBidding(currentPriceWatch1, watch1Div, item);
             botBiddingminutes.shift();
         }
-        
-        if(seocnds===1)
-        {
-            bidOffer.unsubscribe();
-        }
-    });
-
-    
+    });    
 }
 
 function getAuctoinLenght() : number {
@@ -76,12 +77,71 @@ function getBiddingMinutes(auctoinLenght : number) : number[] {
     return biddingMinutes;
 }
 
-function botBidding(currentPrice: HTMLElement, watch1Div: HTMLElement) {
+function botBidding(currentPrice: HTMLElement, watch1Div: HTMLElement, item : Item) {
     let price : number = parseInt(currentPrice.textContent!);
     price+=10;
     currentPrice.innerHTML=price.toString();
+    item.buyer="Bot";
     watch1Div.style.backgroundColor= "#e65353";
     setTimeout(()=>{
         watch1Div.style.backgroundColor= "white";
     }, 250);
+};
+
+export function waitAuctionsEnd() {
+    if (observableItems.length === 0) {
+        return;
+    }
+
+  forkJoin(observableItems).subscribe(() => {
+    finishAuction();
+    observableItems.length = 0;
+    itemsAuction.forEach((item) => {item.buyer="";})
+  });
+}
+
+function endAuction(item : Item,  button : HTMLButtonElement,
+    bidOffer : Subscription, watch1Div: HTMLElement) {
+
+    bidOffer.unsubscribe();
+    button.disabled=true;
+
+    if(item.buyer==="Bot") {
+        watch1Div.style.backgroundColor= "#e65353";
+    } else{
+        watch1Div.style.backgroundColor= "#34eb49";
+    }
+
+    if(itemsAuction.length===1){
+        finishAuction();
+    }
+}
+
+function finishAuction() {
+    if(itemsAuction.length===1) {
+        if(itemsAuction[0].buyer==="User") {
+            Swal.fire({
+                icon: 'success',
+                title: 'Congratulate',
+                text: 'You bought: '+itemsAuction[0].title
+              })
+        }
+    } else {
+        if(itemsAuction[0].buyer==="User") {
+            if(itemsAuction[1].buyer==="User") {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Congratulate',
+                    text: 'You bought: '+itemsAuction[0].title + ', '+itemsAuction[1].title
+                  })
+            } else {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Congratulate',
+                    text: 'You bought: '+itemsAuction[0].title
+                  })
+            }
+        }
+    }
+    itemsAuction.length=0;
 }

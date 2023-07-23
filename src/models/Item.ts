@@ -6,5 +6,5 @@ export interface Item {
     description: string;
     image: string;
     startPrice: number;
-    livePrice: number;
+    buyer: string;
 }
