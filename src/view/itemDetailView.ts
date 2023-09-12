@@ -1,4 +1,4 @@
-import { addItem, simulateAuction, waitAuctionsEnd } from "../logic/auctionLogic";
+import { addItem, removeItem, simulateAuction, waitAuctionsEnd } from "../logic/auctionLogic";
 import { Item } from "../models/Item";
 import { drawDiv, drawImg, drawLabel } from "../pattern";
 
@@ -109,6 +109,7 @@ function drawWatch1(item : Item) {
     btnX.innerHTML="X";
     btnX.onclick = () => {
         clearWatch1();
+        removeItem(item);
     }
     titleItemWatch1Div.appendChild(btnX);
     
@@ -184,6 +185,7 @@ function drawWatch2(item : Item) {
     btnX.innerHTML="X";
     btnX.onclick = () => {
         clearWatch2();
+        removeItem(item);
     }
     titleItemWatch1Div.appendChild(btnX);
     

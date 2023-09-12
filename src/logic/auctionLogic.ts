@@ -4,11 +4,20 @@ import { updateRemainingSeconds } from "../view/itemDetailView";
 import Swal from "sweetalert2";
 
 const observableItems: Observable<number>[] = [];
+let observableItem1: Observable<number> = null;
 const itemsAuction : Item[] = [];
 
 export function addItem (item: Item) {
     itemsAuction.push(item);
-}
+};
+
+export function removeItem(itemToRemove: Item) {
+    const indexToRemove = itemsAuction.indexOf(itemToRemove);
+    if (indexToRemove !== -1) {
+      itemsAuction.splice(indexToRemove, 1);
+    }
+  }
+  
 
 export function simulateAuction(item : Item, secondsLabel: HTMLElement,
      currentPriceWatch1: HTMLElement, watch1Div: HTMLElement,
@@ -32,7 +41,7 @@ export function simulateAuction(item : Item, secondsLabel: HTMLElement,
                 return false;
             }
         })
-    ).subscribe((userOffer : string) => {
+    ).subscribe(() => {
         button.disabled=false;
     });
 
@@ -42,8 +51,9 @@ export function simulateAuction(item : Item, secondsLabel: HTMLElement,
         finalize(() => { endAuction(item, button, bidOffer, watch1Div);})
     );
 
-    observableItems.push(simulation);
-
+    //observableItems.push(simulation);
+    
+    observableItem1=simulation;
     simulation.subscribe((seocnds : number) => {
         updateRemainingSeconds(seocnds, secondsLabel);
         
@@ -55,16 +65,16 @@ export function simulateAuction(item : Item, secondsLabel: HTMLElement,
 }
 
 function getAuctoinLenght() : number {
-    return Math.round(Math.random()*20);
+    return Math.round(Math.random()*20 + 10);
 }
 
 function getBiddingMinutes(auctoinLenght : number) : number[] {
 
     let biddingNum = Math.round(Math.random()*10);
 
-    // if(biddingNum > 5) {
-    //     biddingNum= biddingNum-5;
-    // }
+    if(biddingNum > 5) {
+        biddingNum= biddingNum-5;
+    }
 
     let biddingMinutes : number [] = [];
 
@@ -94,7 +104,7 @@ export function waitAuctionsEnd() {
     }
 
   forkJoin(observableItems).subscribe(() => {
-    finishAuction();
+    //finishAuction();
     observableItems.length = 0;
     itemsAuction.forEach((item) => {item.buyer="";})
   });
@@ -112,36 +122,45 @@ function endAuction(item : Item,  button : HTMLButtonElement,
         watch1Div.style.backgroundColor= "#34eb49";
     }
 
-    if(itemsAuction.length===1){
-        finishAuction();
+    // if(itemsAuction.length===0){
+    //     finishAuction();
+    // }
+
+    if(item.buyer==="User") {
+        Swal.fire({
+            icon: 'success',
+            title: 'Congratulate',
+            text: 'You bought: '+ item.title
+          });
+        itemsAuction.length=0;
     }
 }
 
-function finishAuction() {
-    if(itemsAuction.length===1) {
-        if(itemsAuction[0].buyer==="User") {
-            Swal.fire({
-                icon: 'success',
-                title: 'Congratulate',
-                text: 'You bought: '+itemsAuction[0].title
-              })
-        }
-    } else {
-        if(itemsAuction[0].buyer==="User") {
-            if(itemsAuction[1].buyer==="User") {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Congratulate',
-                    text: 'You bought: '+itemsAuction[0].title + ', '+itemsAuction[1].title
-                  })
-            } else {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Congratulate',
-                    text: 'You bought: '+itemsAuction[0].title
-                  })
-            }
-        }
-    }
-    itemsAuction.length=0;
-}
+// function finishAuction() {
+//     if(itemsAuction.length===1) {
+//         if(itemsAuction[0].buyer==="User") {
+//             Swal.fire({
+//                 icon: 'success',
+//                 title: 'Congratulate',
+//                 text: 'You bought: '+itemsAuction[0].title
+//               })
+//         }
+//     } else {
+//         if(itemsAuction[0].buyer==="User") {
+//             if(itemsAuction[1].buyer==="User") {
+//                 Swal.fire({
+//                     icon: 'success',
+//                     title: 'Congratulate',
+//                     text: 'You bought: '+itemsAuction[0].title + ', '+itemsAuction[1].title
+//                   })
+//             } else {
+//                 Swal.fire({
+//                     icon: 'success',
+//                     title: 'Congratulate',
+//                     text: 'You bought: '+itemsAuction[0].title
+//                   })
+//             }
+//         }
+//     }
+//     itemsAuction.length=0;
+// }
