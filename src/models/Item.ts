@@ -7,4 +7,5 @@ export interface Item {
     image: string;
     startPrice: number;
     buyer: string;
+    wathc: number;
 }

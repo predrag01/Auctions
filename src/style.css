@@ -75,6 +75,11 @@
 
 .mainTitleDiv {
     margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
 }
 
 .detailsDiv {
@@ -307,4 +312,44 @@
 .inforamtionLabValue, .secondsWatch1, .secondsWatch2, .currentPriceWatch1, .currentPriceWatch2 {
     font-size: 18px;
     font-weight: bold;
+}
+
+
+.tileButtonDiv {
+    display: flex;
+    flex-direction: row;
+}
+
+.historyDiv {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid rgb(100, 99, 99);
+    width: 90%;
+    max-height: 25%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    box-shadow: 5px 5px #e4e2e2;
+}
+
+.historyTitle{
+    font-size: 25px;
+    font-weight: bold;
+    font-style: italic;
+    margin-left: 10px;
+    margin-top: 15px;
+}
+
+.historyValueDiv{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.historyValue{
+    margin-left: 10px;
+    margin-bottom: 7px;
+    font-size: 15;
+    font-weight: 500;
 }

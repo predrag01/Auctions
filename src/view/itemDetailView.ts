@@ -1,4 +1,4 @@
-import { addItem, removeItem, simulateAuction, waitAuctionsEnd } from "../logic/auctionLogic";
+import { addItem, removeItem, simulateAuction, startSimulation, waitAuctionsEnd, watch1, watch2 } from "../logic/auctionLogic";
 import { Item } from "../models/Item";
 import { drawDiv, drawImg, drawLabel } from "../pattern";
 
@@ -7,8 +7,17 @@ export function drawCenter() {
     const centerDiv=drawDiv(mainDiv, "centerDiv");
 
     const mainTitleDiv= drawDiv(centerDiv, "mainTitleDiv");
+    
     drawLabel(mainTitleDiv, "mainTitle", "Live Auctions");
-
+    const btnWatch1Div = drawDiv(mainTitleDiv, "btnWatch1Div");
+    const btnwatch1 = document.createElement("button");
+    btnwatch1.className="watch";
+    btnwatch1.innerHTML="Start";
+    btnwatch1.onclick = () => {
+        startSimulation();
+    };
+    btnWatch1Div.appendChild(btnwatch1);
+    
     const detailsDiv=drawDiv(centerDiv, "detailsDiv");
     
     const watchsDiv=drawDiv(centerDiv, "watchsDiv");
@@ -59,13 +68,7 @@ export function drawDetails(item : Item) {
     btnwatch1.onclick = () => {
         drawWatch1(item);
         addItem(item);
-        const secondsLabel : HTMLElement =document.querySelector(".secondsWatch1");
-        const currentPriceWatch : HTMLElement =document.querySelector(".currentPriceWatch1");
-        const watchDiv : HTMLElement =document.querySelector(".watch1Div");
-        const inputBid : HTMLElement =document.querySelector(".inputBid1");
-        const button : HTMLButtonElement = document.querySelector(".btnBidWatch1")
-        simulateAuction(item, secondsLabel, currentPriceWatch, watchDiv, inputBid, button);
-        waitAuctionsEnd();
+        watch1(item);
     };
     btnWatch1Div.appendChild(btnwatch1);
 
@@ -76,13 +79,7 @@ export function drawDetails(item : Item) {
     btnwatch2.onclick = () => {
         drawWatch2(item);
         addItem(item);
-        const secondsLabel : HTMLElement =document.querySelector(".secondsWatch2");
-        const currentPriceWatch : HTMLElement =document.querySelector(".currentPriceWatch2");
-        const watchDiv : HTMLElement =document.querySelector(".watch2Div");
-        const inputBid : HTMLElement =document.querySelector(".inputBid2");
-        const button : HTMLButtonElement = document.querySelector(".btnBidWatch2")
-        simulateAuction(item, secondsLabel, currentPriceWatch, watchDiv, inputBid, button);
-        waitAuctionsEnd();
+        watch2(item);
     };
     btnWatch2Div.appendChild(btnwatch2);
 }
@@ -145,13 +142,11 @@ function drawWatch1(item : Item) {
     const bidBtn =document.createElement("button");
     bidBtn.className="btnBidWatch1";
     bidBtn.innerHTML="Bid";
-    bidBtn.disabled=true;
+    bidBtn.disabled=false;
     bidBtn.onclick = () => {
-        console.log("Bit");
         item.buyer="User";
         const currentPriceWatch1 : HTMLElement =document.querySelector(".currentPriceWatch1");
         currentPriceWatch1.textContent=inputBid1.value;
-        bidBtn.disabled=true;
 
         watch1Div.style.backgroundColor= "#34eb49";
         setTimeout(()=>{
@@ -221,13 +216,11 @@ function drawWatch2(item : Item) {
     const bidBtn =document.createElement("button");
     bidBtn.className="btnBidWatch2";
     bidBtn.innerHTML="Bid";
-    bidBtn.disabled=true;
+    bidBtn.disabled=false;
     bidBtn.onclick = () => {
-        console.log("Bit");
         item.buyer="User";
         const currentPriceWatch2 : HTMLElement =document.querySelector(".currentPriceWatch2");
         currentPriceWatch2.textContent=inputBid2.value;
-        bidBtn.disabled=true;
 
         watch2Div.style.backgroundColor= "#34eb49";
         setTimeout(()=>{
@@ -249,4 +242,21 @@ function clearWatch2() {
 
 export function updateRemainingSeconds(seconds : number, secondsLabel: HTMLElement) {
     secondsLabel.innerHTML=seconds.toString();
+}
+
+export function drawBiddingHistory()
+{
+    const centerDiv: HTMLElement =document.querySelector(".centerDiv");
+    const historyDiv=drawDiv(centerDiv, "historyDiv");
+
+    const historyTitleDiv= drawDiv(historyDiv, "historyTitleDiv");
+    
+    drawLabel(historyTitleDiv, "historyTitle", "Bidding history");
+
+    const historyValueDiv = drawDiv(historyDiv, "historyValueDiv");
+}
+
+export function drawHistoryLabel(value: string){
+    const historyValueDiv: HTMLElement =document.querySelector(".historyValueDiv");
+    drawLabel(historyValueDiv, "historyValue", value);
 }
